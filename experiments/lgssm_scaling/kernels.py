@@ -19,6 +19,7 @@ import gradient_csmc.tp as tp
 import gradient_csmc.tp_csmc as tpf
 import gradient_csmc.imh as imh
 import gradient_csmc.a_pcnl_csmc_f as apcnf
+import gradient_csmc.ta_pcnl_csmc_f as t_apcnf
 from experiments.lgssm_scaling.model import log_likelihood, log_potential, log_pdf
 
 
@@ -237,10 +238,9 @@ def get_pcn_csmc_kernel(ys, sigma, N, style="filtering", stop_gradient=False, **
         # kernel = atps.get_kernel(m0, P0, r0, mut, Qs, rt_plus_params, N=N, **kwargs)
         raise NotImplementedError
     elif style == 'twisted':
-        # Fs = jnp.repeat(F[None, ...], ys.shape[0] - 1, axis=0)
-        # bs = jnp.repeat(b[None, ...], ys.shape[0] - 1, axis=0)
-        # kernel = t_atpf.get_kernel(m0, P0, r0, Fs, bs, Qs, rt_plus_params, N=N, **kwargs)
-        raise NotImplementedError
+        Fs = jnp.repeat(F[None, ...], ys.shape[0] - 1, axis=0)
+        bs = jnp.repeat(b[None, ...], ys.shape[0] - 1, axis=0)
+        kernel = t_apcnf.get_kernel(m0, P0, r0, Fs, bs, Qs, rt_plus_params, N=N, **kwargs)
     else:
         raise NotImplementedError(
             f"Unknown style: {style}, choose from 'marginal', 'filtering', 'smoothing', 'twisted'")

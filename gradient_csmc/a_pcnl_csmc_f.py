@@ -99,7 +99,7 @@ def get_kernel(mu0: Array, P0: Array, r0: Callable,
         ###############################
         betas = 2 / (2 + ells)
         pCs, chols_prop, chols_inv_prop = get_proposal_params(betas)
-        jax.debug.print("pCS shape = {}", pCs.shape)
+        # jax.debug.print("pCS shape = {}", pCs.shape)
 
         T, d_x = x_star.shape
         key_csmc, _, key_aux = jax.random.split(key, 3)

@@ -46,7 +46,7 @@ STYLES = (
     # 'auxiliary', 'marginal',
     # 'auxiliary',
     # 'na',
-    'filtering',
+    'twisted',
 )
 
 SCALES = (
